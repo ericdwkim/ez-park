@@ -16,9 +16,6 @@ options = webdriver.ChromeOptions()
 driver = uc.Chrome(use_subprocess=True, version_main=111, options=options)
 driver.get(parqking_url)
 
-# license_plate_textbox_wait = WebDriverWait(driver, 15).until(
-# EC.visibility_of_element_located((By.CLASS_NAME, 'form-control uppercase alphanum')))
-
 # 1) Enter license plate
 license_plate_textbox_selector = driver.find_element(By.CSS_SELECTOR, '#plateno')
 license_plate_textbox_selector.click()
@@ -51,13 +48,13 @@ confirmation_screen_wait = WebDriverWait(driver, 30).until(
     EC.visibility_of_element_located((By.CSS_SELECTOR, 'h4.text-center:nth-child(1)')) #"PASS ISSUED"
 )
 guest_plate_num = driver.find_element(By.CSS_SELECTOR, 'h1.text-center')
-print(f'Resident guest\'s license plate: {guest_plate_num.text} has been registered!')
+print(f'Resident guest\'s license plate: "{guest_plate_num.text}" has been registered!')
 
-registration_created_date = driver.find_element(By.CSS_SELECTOR, 'span.timezone:nth-child(3)')
-print(f'\nThe guest parking pass was registered on: {registration_created_date}')
+# registration_created_date = driver.find_element(By.CSS_SELECTOR, 'span.timezone:nth-child(3)')
+# TODO: print(f'\nThe guest parking pass was registered on: {registration_created_date}')
 
-registration_exp_date = driver.find_element(By.CSS_SELECTOR, 'span.timezone:nth-child(2)')
-print(f'\nThe guest parking pass expires on: {registration_exp_date}')
+# registration_exp_date = driver.find_element(By.CSS_SELECTOR, 'span.timezone:nth-child(2)')
+# TODO: print(f'\nThe guest parking pass expires on: {registration_exp_date}')
 
 # 8) Format receipt url from original url
 old_substr = "Parkit"
