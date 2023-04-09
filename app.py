@@ -58,7 +58,7 @@ print(f'Resident guest\'s license plate: "{guest_plate_num.text}" has been regis
 
 # 8) Format web receipt url from parkit receipt url
 parkit_receipt_url = driver.current_url
-print(f'parkit_receipt_url: {parkit_receipt_url}') # https://parqking.com/Parkit/receipt/rcb3/934072/
+print(f'parkit_receipt_url: {parkit_receipt_url}') # base_url/Parkit/...
 old_substr = "Parkit"
 new_substr = "Web"
 # Find start/end indices of substring to replace
@@ -66,7 +66,7 @@ start_idx = parkit_receipt_url.find(old_substr) # 21 idx
 end_idx = start_idx + len(new_substr) # 27 idx
 # Construct new url string replacing old with new substring
 web_receipt_url = parkit_receipt_url[:start_idx] + new_substr + parkit_receipt_url[end_idx:]
-print(f'web_receipt_url: {web_receipt_url}') # https://parqking.com/Web/receipt/rcb3/934072/
+print(f'web_receipt_url: {web_receipt_url}') # base_url/Web/...
 driver.get(web_receipt_url)
 
 # 9) Send guest receipt screenshot via text
