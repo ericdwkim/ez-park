@@ -6,6 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
 
+# test test
+
 # Environmental variables
 license_plate_to_register = os.getenv('TEST_LICENSE_PLATE')
 resident_parking_code = os.getenv('RESIDENT_PARKING_CODE')
