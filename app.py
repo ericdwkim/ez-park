@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from PIL import Image
 
 # Environmental variables
 license_plate_to_register = os.getenv('TEST_LICENSE_PLATE')
@@ -50,17 +51,12 @@ confirmation_screen_wait = WebDriverWait(driver, 30).until(
 guest_plate_num = driver.find_element(By.CSS_SELECTOR, 'h1.text-center')
 print(f'Resident guest\'s license plate: "{guest_plate_num.text}" has been registered!')
 
-# registration_created_date = driver.find_element(By.CSS_SELECTOR, 'span.timezone:nth-child(3)')
-# TODO: print(f'\nThe guest parking pass was registered on: {registration_created_date}')
-
-# registration_exp_date = driver.find_element(By.CSS_SELECTOR, 'span.timezone:nth-child(2)')
-# TODO: print(f'\nThe guest parking pass expires on: {registration_exp_date}')
-
 # 8) Format web receipt url from parkit receipt url
 parkit_receipt_url = driver.current_url
 print(f'parkit_receipt_url: {parkit_receipt_url}') # base_url/Parkit/...
 old_substr = "Parkit"
 new_substr = "Web"
+
 # Find start/end indices of substring to replace
 start_idx = parkit_receipt_url.find(old_substr) # 21 idx
 end_idx = start_idx + len(new_substr) # 27 idx
@@ -69,48 +65,6 @@ web_receipt_url = parkit_receipt_url[:start_idx] + new_substr + parkit_receipt_u
 print(f'web_receipt_url: {web_receipt_url}') # base_url/Web/...
 driver.get(web_receipt_url)
 
-# 9) Send guest receipt screenshot via text
+# 9) Save screenshot
 license_plate_from_web_receipt = driver.find_element(By.CSS_SELECTOR, '.textLayer > span:nth-child(35)')
 registration_receipt_box = driver.save_screenshot(f'DayPassReceipt-{license_plate_from_web_receipt}.png') # `DayPassReceipt-ABC1234.png`
-
-# TODO: Textlocal's REST API
-'''
-    import requests
-    
-    # set the Textlocal API endpoint
-    url = "https://api.textlocal.in/send_mms"
-    
-    # set your Textlocal account details
-    api_key = "your_api_key"
-    sender = "TXTLCL"
-    
-    # set the phone number and message details
-    phone_number = "919xxxxxxxxx"   # replace with recipient phone number
-    message = "Here's your PNG file!"
-    
-    # set the file path
-    file_path = "image.png"    # replace with your PNG file path
-    
-    # open the file and read its contents as binary data
-    with open(file_path, "rb") as f:
-        file_data = f.read()
-    
-    # set the parameters for the Textlocal API request
-    payload = {
-        "apikey": api_key,
-        "numbers": phone_number,
-        "message": message,
-        "sender": sender
-    }
-    
-    # set the files parameter to include the PNG file data
-    files = {
-        "file": ("image.png", file_data, "image/png")
-    }
-    
-    # make the POST request to the Textlocal API
-    response = requests.post(url, data=payload, files=files)
-    
-    # print the response from the server
-    print(response.text)
-'''
