@@ -4,12 +4,14 @@ from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from PIL import Image
+# from PIL import Image
 
 # test test
 
 # Environmental variables
-license_plate_to_register = os.getenv('TEST_LICENSE_PLATE')
+# license_plate_to_register = os.getenv('TEST_LICENSE_PLATE')
+license_plate_to_register = os.getenv('JOHN_LICENSE_PLATE')
+guest_phone_num = os.getenv('JOHN_CELL_NUM')
 resident_parking_code = os.getenv('RESIDENT_PARKING_CODE')
 test_phone_num = os.getenv('GOOGLE_VOICE_PHONE_NUM')
 parqking_url = os.getenv('PARQKING_URL')
@@ -40,7 +42,9 @@ enter_resident_code_modal.send_keys(resident_parking_code)
 # 5) Enter resident guest phone number
 guest_phone_number_textbox_selector = driver.find_element(By.CSS_SELECTOR, '#guestphone')
 guest_phone_number_textbox_selector.click()
-guest_phone_number_textbox_selector.send_keys(test_phone_num)
+# guest_phone_number_textbox_selector.send_keys(test_phone_num)
+guest_phone_number_textbox_selector.send_keys(guest_phone_num)
+
 
 # 6) Submit resident code & guest phone number
 continue_btn = driver.find_element(By.CSS_SELECTOR, '#issue-guest-pass')
