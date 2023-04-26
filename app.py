@@ -7,13 +7,16 @@ from selenium.webdriver.support import expected_conditions as EC
 # from PIL import Image
 
 # Environmental variables
-license_plate_to_register = os.getenv('TEST_LICENSE_PLATE')
+# license_plate_to_register = os.getenv('TEST_LICENSE_PLATE')
+license_plate_to_register = os.getenv('SW_LICENSE_PLATE')
+guest_phone_num = os.getenv('SW_PHONE_NUM')
 resident_parking_code = os.getenv('RESIDENT_PARKING_CODE')
 test_phone_num = os.getenv('GOOGLE_VOICE_PHONE_NUM')
 parqking_url = os.getenv('PARQKING_URL')
 
 # Chrome driver instance
 options = webdriver.ChromeOptions()
+options.add_argument('--headless=new')
 driver = uc.Chrome(use_subprocess=True, version_main=111, options=options)
 driver.get(parqking_url)
 
@@ -68,5 +71,5 @@ print(f'web_receipt_url: {web_receipt_url}') # base_url/Web/...
 driver.get(web_receipt_url)
 
 # 9) Save screenshot
-license_plate_from_web_receipt = driver.find_element(By.CSS_SELECTOR, '.textLayer > span:nth-child(35)')
-registration_receipt_box = driver.save_screenshot(f'DayPassReceipt-{license_plate_from_web_receipt}.png') # `DayPassReceipt-ABC1234.png`
+# license_plate_from_web_receipt = driver.find_element(By.CSS_SELECTOR, '.textLayer > span:nth-child(35)')
+# registration_receipt_box = driver.save_screenshot(f'DayPassReceipt-{license_plate_from_web_receipt}.png') # `DayPassReceipt-ABC1234.png`
