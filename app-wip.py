@@ -20,7 +20,8 @@ initials = input('Enter the guest\'s initials (eg: "JS" for John Smith): ')
 license_plate_env_name = f'{initials}_LICENSE_PLATE'
 guest_phone_env_name = f'{initials}_CELL_NUM'
 
-
+# TODO: ensure that license plate follows the general format of a typical license plate w/ odd exceptions allowed
+# TODO: ensure that cell phone numbers are insensitive to inputted format for easier copy/paste as input or as just a series of ints
 license_plate_to_register = existing_or_new_guest(license_plate_env_name, "Enter the guest's license plate to register: ")
 license_plate_to_register = existing_or_new_guest(guest_phone_env_name, "Enter the guest's cell number to register: ")
 
