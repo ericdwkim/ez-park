@@ -4,14 +4,29 @@ from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-# from PIL import Image
 
-# TEST
+# Function to check for existing guests info or ask for new guest's info
+def existing_or_new_guest(env_var_name, prompt_msg):
+    if env_var_name in os.environ:
+        return os.getenv(env_var_name)
+    else:
+        return input(prompt_msg)
+
+# Get initials
+initials = input('Enter the guest\'s initials (eg: "JS" for John Smith): ')
+
+# Check if env vars exist and fetch values or ask for new guest info
+license_plate_env_name = f'{initials}_LICENSE_PLATE'
+guest_phone_env_name = f'{initials}_CELL_NUM'
+
+
+license_plate_to_register = existing_or_new_guest(license_plate_env_name, "Enter the guest's license plate to register: ")
+license_plate_to_register = existing_or_new_guest(guest_phone_env_name, "Enter the guest's cell number to register: ")
 
 
 # Environmental variables
-license_plate_to_register = os.getenv('TEST_LICENSE_PLATE')
-guest_phone_num = os.getenv('TEST_CELL_NUM')
+# license_plate_to_register = os.getenv('TEST_LICENSE_PLATE')
+# guest_phone_num = os.getenv('TEST_CELL_NUM')
 
 resident_parking_code = os.getenv('RESIDENT_PARKING_CODE')
 # test_phone_num = os.getenv('GOOGLE_VOICE_PHONE_NUM')
