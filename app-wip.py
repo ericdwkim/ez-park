@@ -37,7 +37,7 @@ parqking_url = os.getenv('PARQKING_URL')
 # Chrome driver instance
 options = webdriver.ChromeOptions()
 options.add_argument('--headless=new')
-driver = uc.Chrome(use_subprocess=True, version_main=111, options=options)
+driver = uc.Chrome(use_subprocess=True, version_main=113, options=options)
 driver.get(parqking_url)
 
 # 1) Enter license plate
