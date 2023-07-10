@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+
 # from PIL import Image
 
 
@@ -18,7 +20,7 @@ parqking_url = os.getenv('PARQKING_URL')
 # Chrome driver instance
 options = webdriver.ChromeOptions()
 options.add_argument('--headless=new')
-driver = uc.Chrome(use_subprocess=True, version_main=111, options=options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 driver.get(parqking_url)
 
 # 1) Enter license plate
